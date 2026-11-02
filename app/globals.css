@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+/* Design tokens from CLAUDE.md → Design (reference: notes/design/reference-velora-beauty-home.jpg) */
+@theme {
+  --color-blush: #f1e3e1; /* page background */
+  --color-surface: #f8efed;
+  --color-ink: #2a1e1e; /* espresso text */
+  --color-muted: #6f5a5c; /* #7A6466 darkened slightly for 4.5:1 on blush */
+  --color-espresso: #2b1e1e; /* dark bands */
+  --color-night: #111111; /* announcement bar */
+  --color-pink: #ebb3be; /* accent */
+  --color-pink-hover: #e29dab;
+  --color-rose: #e8c7cb; /* product tile bg */
+  --color-mauve: #b87f8b;
+  --color-cream: #f6eeea; /* text on dark */
+  --color-line: #dcc6c4;
+  --color-danger: #a8323e;
+  --color-success: #3f6b4a;
+
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), "Times New Roman", serif;
+
+  --radius-none: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-blush);
+  color: var(--color-ink);
+  font-size: 15px;
+  line-height: 1.6;
+}
+@media (min-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@layer components {
+  /* Small tracked uppercase label (nav, eyebrows, buttons) */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  /* Uppercase high-contrast serif heading */
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+  }
+  .btn {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.75rem;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: background-color 150ms, color 150ms, border-color 150ms;
+  }
+  .btn-pink {
+    background: var(--color-pink);
+    color: var(--color-ink);
+  }
+  .btn-pink:hover {
+    background: var(--color-pink-hover);
+  }
+  .btn-dark {
+    background: var(--color-espresso);
+    color: var(--color-cream);
+  }
+  .btn-dark:hover {
+    background: #000;
+  }
+  .btn-outline {
+    border: 1px solid currentColor;
+  }
+  .btn-outline:hover {
+    background: var(--color-ink);
+    color: var(--color-cream);
+    border-color: var(--color-ink);
+  }
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding-bottom: 2px;
+    border-bottom: 1px solid currentColor;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .field {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    padding: 0.7rem 0.9rem;
+    color: var(--color-ink);
+    outline: none;
+  }
+  .field:focus {
+    border-color: var(--color-ink);
+  }
+  .label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  /* Rose-tinted product photo, as in the reference */
+  .tint::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-rose);
+    mix-blend-mode: multiply;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-mauve);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

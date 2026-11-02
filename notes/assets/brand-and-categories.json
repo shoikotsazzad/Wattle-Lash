@@ -1,0 +1,26 @@
+{
+  "brand": {
+    "name": "Wattle & Lash",
+    "market": "Australia",
+    "currency": "AUD",
+    "prices_include_gst": true,
+    "shipping_note": "Free standard shipping on orders over $100 AUD"
+  },
+  "categories": [
+    {"id": 1, "name": "Strip Lashes", "slug": "strip-lashes", "description": "Reusable and everyday strip lashes in natural, volume and dramatic styles."},
+    {"id": 2, "name": "Individual Lash Clusters", "slug": "individual-lash-clusters", "description": "Pre-made clusters for DIY and salon lash extensions in a range of curls and lengths."},
+    {"id": 3, "name": "Lash Extension Kits", "slug": "lash-extension-kits", "description": "Complete kits for beginners, at-home use, salon professionals and lash artist training."},
+    {"id": 4, "name": "Lash Serums and Growth", "slug": "lash-serums-and-growth", "description": "Conditioning and nourishing serums that help lashes look fuller, stronger and healthier."},
+    {"id": 5, "name": "Lash Adhesives and Glues", "slug": "lash-adhesives-and-glues", "description": "Strip lash glues and extension adhesives in clear and black, including low fume and sensitive formulas."},
+    {"id": 6, "name": "Lash Primers and Bonders", "slug": "lash-primers-and-bonders", "description": "Prep products that degrease and dehydrate the natural lash for longer lasting extensions."},
+    {"id": 7, "name": "Lash Removers and Cleansers", "slug": "lash-removers-and-cleansers", "description": "Gentle removers, cleansers and bond breakers for safe glue and extension removal."},
+    {"id": 8, "name": "Mascaras", "slug": "mascaras", "description": "Volumising, lengthening, curling and waterproof mascaras for every lash look."},
+    {"id": 9, "name": "Lash Curlers and Tools", "slug": "lash-curlers-and-tools", "description": "Heated and precision curlers, brushes, combs and tweezers for flawless lashes."},
+    {"id": 10, "name": "Brow Products", "slug": "brow-products", "description": "Gels, pencils, powders and tints for defined, full and feathered brows."},
+    {"id": 11, "name": "Eye Creams and Under Eye Care", "slug": "eye-creams-and-under-eye-care", "description": "Hydrating and brightening eye treatments for the delicate skin around the eyes and lash line."},
+    {"id": 12, "name": "Lash Lift and Perm Kits", "slug": "lash-lift-and-perm-kits", "description": "Lash lifting and tinting kits for a curled, defined lash look that lasts up to 8 weeks."},
+    {"id": 13, "name": "Lash Storage and Accessories", "slug": "lash-storage-and-accessories", "description": "Cases, trays, stands and holders that keep lash supplies organised and easy to reach."},
+    {"id": 14, "name": "Gift Sets and Bundles", "slug": "gift-sets-and-bundles", "description": "Curated sets and bundles for beauty lovers, bridal parties, tech starters and gifting."},
+    {"id": 15, "name": "Lash and Beauty Supplements", "slug": "lash-and-beauty-supplements", "description": "Vitamins and beauty supplements formulated to support healthy hair, skin, nails and lashes from within."}
+  ]
+}
