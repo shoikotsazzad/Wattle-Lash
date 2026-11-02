@@ -1,4 +1,4 @@
-// Order helpers shared by checkout, the demo payment route and admin.
+// Order helpers shared by checkout, the payment route and admin.
 import { randomBytes } from "node:crypto";
 import { revalidateTag } from "next/cache";
 
@@ -15,7 +15,7 @@ export async function newOrderNo() {
 export const newAccessKey = () => randomBytes(16).toString("hex");
 
 /**
- * Mark an order paid (demo gateway). Atomic: only the first call for an unpaid
+ * Mark an order paid (test mode). Atomic: only the first call for an unpaid
  * or failed order wins, so a double submit can't pay or deduct stock twice.
  */
 export async function markPaid(orderId: string, method: string) {
@@ -24,7 +24,7 @@ export async function markPaid(orderId: string, method: string) {
     { _id: orderId, "payment.status": { $in: ["unpaid", "failed"] } },
     {
       $set: { "payment.status": "paid", "payment.paidAt": new Date(), "payment.method": method },
-      $push: { timeline: { at: new Date(), text: "Payment received (demo)" } },
+      $push: { timeline: { at: new Date(), text: "Payment received (test)" } },
     },
     { returnDocument: "after" },
   );

@@ -1,6 +1,6 @@
-# Client: Wattle & Lash (portfolio demo)
+# Client: Wattle & Lash
 
-Fictional brand for a portfolio project. Brand data supplied by the developer (2026-10-30); contact and legal details are fictional placeholders chosen by Claude at the developer's request.
+Brand data supplied by the developer (2026-10-30). Contact and legal details are placeholders chosen by Claude at the developer's request, and are not working details.
 
 ## Business
 - Name: Wattle & Lash
@@ -9,9 +9,9 @@ Fictional brand for a portfolio project. Brand data supplied by the developer (2
 - ABN: 00 000 000 000 (placeholder)
 - Logo: none given
 
-## Contact (fictional)
-- Phone: (03) 7010 4321 — ACMA range reserved for fictional use (confirm against the ACMA list before publishing)
-- Mobile: 0491 570 156 — ACMA fictional mobile number
+## Contact (placeholders)
+- Phone: (03) 7010 4321 — ACMA reserved range, not a working number (confirm against the ACMA list before publishing)
+- Mobile: 0491 570 156 — ACMA reserved mobile number, not a working number
 - Email: hello@wattleandlash.example · Orders: orders@wattleandlash.example
 - Website: www.wattleandlash.example
 

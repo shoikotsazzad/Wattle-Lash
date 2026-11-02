@@ -1,5 +1,5 @@
-// Seeds categories + products from the brand files and creates the first admin.
-// Usage: npm run seed   (reads .env.local). Safe to re-run: upserts by slug / SKU.
+// Loads categories + products from the brand files and creates the first admin.
+// Usage: npm run db:setup   (reads .env.local). Safe to re-run: upserts by slug / SKU.
 // Existing products keep their stock, images and edits unless you pass --reset.
 import { readFileSync } from "node:fs";
 import { randomBytes, scrypt } from "node:crypto";
@@ -15,7 +15,7 @@ if (!uri) {
 
 const slugify = (s) => s.toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
-// Category seed lives in data/categories.ts; parse the array out of it to avoid a TS build step.
+// The category list lives in data/categories.ts; parse the array out of it to avoid a TS build step.
 const catSrc = readFileSync(new URL("../data/categories.ts", import.meta.url), "utf8");
 const categories = [...catSrc.matchAll(/\{ slug: "([^"]+)", name: "([^"]+)", description: "([^"]+)", image: "([^"]+)", order: (\d+) \}/g)].map(
   ([, slug, name, description, image, order]) => ({ slug, name, description, image, order: Number(order) }),
@@ -63,7 +63,7 @@ await db.collection("products").createIndex({ slug: 1 }, { unique: true });
 console.log(`Categories: ${catRes.upsertedCount} added, ${catRes.modifiedCount} updated`);
 console.log(`Products:   ${prodRes.upsertedCount} added, ${prodRes.modifiedCount} updated (${products.length} in file)`);
 
-// The admin in .env.local is the source of truth: changing it and re-running the seed updates
+// The admin in .env.local is the source of truth: changing it and re-running this script updates
 // the existing admin instead of leaving the old login active next to a new one.
 const email = process.env.ADMIN_EMAIL?.toLowerCase().trim();
 const password = process.env.ADMIN_PASSWORD;

@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildMetadata } from "@/lib/seo";
 import { getByCategory, getCategories, getCategory, toCard } from "@/lib/catalog";
-import { categorySeed } from "@/data/categories";
+import { categoryList } from "@/data/categories";
 import { Container, PageHeader } from "@/components/Container";
 import { ShopBrowser } from "@/components/ShopBrowser";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export function generateStaticParams() {
-  return categorySeed.map((c) => ({ category: c.slug }));
+  return categoryList.map((c) => ({ category: c.slug }));
 }
 
 export async function generateMetadata(props: PageProps<"/shop/[category]">): Promise<Metadata> {

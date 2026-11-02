@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { categorySeed } from "@/data/categories";
+import { categoryList } from "@/data/categories";
 import { Empty, ErrorText, Loading, PageTitle, Pager, api, money, td, th, useAdmin } from "./ui";
 
 type Row = { id: string; sku: string; slug: string; name: string; category: string; price: number; stock: number; bestseller: boolean; vegan: boolean; active: boolean; image: string };
@@ -16,7 +16,7 @@ export function ProductsList() {
   const qs = sp.toString();
   const { data, error, loading, reload } = useAdmin<{ products: Row[]; page: number; pages: number; total: number }>(`/api/admin/products?${qs}`);
   const [stockEdits, setStockEdits] = useState<Record<string, string>>({});
-  const catName = (slug: string) => categorySeed.find((c) => c.slug === slug)?.name ?? slug;
+  const catName = (slug: string) => categoryList.find((c) => c.slug === slug)?.name ?? slug;
 
   const setParam = (k: string, v: string) => {
     const next = new URLSearchParams(qs);
@@ -41,7 +41,7 @@ export function ProductsList() {
         <input name="q" defaultValue={sp.get("q") ?? ""} placeholder="Name or SKU" className="field min-h-10 w-56 py-1.5" />
         <select aria-label="Category" value={sp.get("category") ?? ""} onChange={(e) => setParam("category", e.target.value)} className="field min-h-10 w-auto py-1.5">
           <option value="">All categories</option>
-          {categorySeed.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
+          {categoryList.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
         </select>
         <select aria-label="Filter" value={sp.get("stock") ?? (sp.get("active") === "false" ? "hidden" : "")} onChange={(e) => { const v = e.target.value; const next = new URLSearchParams(qs); next.delete("stock"); next.delete("active"); next.delete("page"); if (v === "low") next.set("stock", "low"); if (v === "hidden") next.set("active", "false"); router.replace(`${pathname}?${next}`); }} className="field min-h-10 w-auto py-1.5">
           <option value="">All</option>
@@ -51,7 +51,7 @@ export function ProductsList() {
         <button className="btn btn-dark min-h-10">Search</button>
       </form>
 
-      {loading ? <Loading /> : error ? <ErrorText error={error} /> : !data?.products.length ? <Empty>No products. Run <code>npm run seed</code> or add one.</Empty> : (
+      {loading ? <Loading /> : error ? <ErrorText error={error} /> : !data?.products.length ? <Empty>No products. Run <code>npm run db:setup</code> or add one.</Empty> : (
         <>
           <p className="mb-2 text-sm text-muted">{data.total} products</p>
           <div className="overflow-x-auto border border-line bg-white/60">

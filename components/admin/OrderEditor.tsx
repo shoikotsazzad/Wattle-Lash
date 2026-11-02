@@ -140,7 +140,7 @@ export function OrderEditor({ id }: { id: string }) {
                 Mark as paid
               </button>
             )}
-            <p className="mt-3 text-xs text-muted">Demo payments: no money moves. Set the payment status to refunded manually.</p>
+            <p className="mt-3 text-xs text-muted">Test mode: no money moves. Set the payment status to refunded manually.</p>
           </section>
 
           <section className={card}>

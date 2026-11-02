@@ -82,7 +82,7 @@ export const home = {
   // New section 9
   trust: [
     { icon: "truck", title: "Free shipping over $100", text: "Flat $9.95 standard shipping Australia-wide below that." },
-    { icon: "lock", title: "Secure checkout", text: "Demo checkout: try it with test card 4242 4242 4242 4242." },
+    { icon: "lock", title: "Secure checkout", text: "Test mode: try it with card 4242 4242 4242 4242." },
     { icon: "tag", title: "Prices include GST", text: "What you see is what you pay at checkout." },
     { icon: "leaf", title: "Vegan options", text: "Filter the shop to see products marked vegan." },
   ],

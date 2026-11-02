@@ -27,7 +27,7 @@ export default function CategoriesPage() {
     <>
       <PageTitle title="Categories" />
       <p className="-mt-3 mb-6 text-sm text-muted">URL slugs are fixed; edit names, descriptions, photos and order. {msg}</p>
-      {loading ? <Loading /> : error ? <ErrorText error={error} /> : !data?.categories.length ? <Empty>No categories. Run <code>npm run seed</code>.</Empty> : (
+      {loading ? <Loading /> : error ? <ErrorText error={error} /> : !data?.categories.length ? <Empty>No categories. Run <code>npm run db:setup</code>.</Empty> : (
         <ul className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {data.categories.map((c) =>
             editing?.id === c.id ? (

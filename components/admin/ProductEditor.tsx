@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { categorySeed } from "@/data/categories";
+import { categoryList } from "@/data/categories";
 import { BackLink, ErrorText, Loading, api, card, useAdmin } from "./ui";
 import { ImageUploader } from "./ImageUploader";
 
@@ -83,7 +83,7 @@ function Form({ initial, id }: { initial: P; id?: string }) {
               <label htmlFor="category" className="label">Category</label>
               <select id="category" value={p.category} onChange={(e) => set("category", e.target.value)} className="field">
                 <option value="">Choose…</option>
-                {categorySeed.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
+                {categoryList.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
               </select>
               {err("category")}
             </div>

@@ -2,7 +2,7 @@
 import { connectDB } from "@/lib/db";
 import { gstOf } from "@/lib/money";
 import { shipping } from "@/data/shipping";
-import { categorySeed } from "@/data/categories";
+import { categoryList } from "@/data/categories";
 import type { CartLine, Quote, QuoteLine } from "@/lib/types";
 
 export type PricedQuote = Quote & { productIds: Record<string, string> };
@@ -25,7 +25,7 @@ export async function priceCart(items: CartLine[], couponCode?: string, shipping
       slug: p.slug,
       name: p.name,
       size: p.size ?? "",
-      image: p.images?.[0] || categorySeed.find((c) => c.slug === p.category)?.image || "",
+      image: p.images?.[0] || categoryList.find((c) => c.slug === p.category)?.image || "",
       price: p.price,
       qty,
       lineTotal: p.price * qty,

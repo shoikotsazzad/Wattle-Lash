@@ -1,7 +1,7 @@
 // The 15 categories supplied by the brand (notes/assets/brand-and-categories.json),
-// plus a stock photo each. Seeded into MongoDB; also the fallback when no DB is set.
+// plus a stock photo each. Loaded into MongoDB; also the fallback when no DB is set.
 
-export type CategorySeed = {
+export type CategoryInfo = {
   slug: string;
   name: string;
   description: string;
@@ -9,7 +9,7 @@ export type CategorySeed = {
   order: number;
 };
 
-export const categorySeed: CategorySeed[] = [
+export const categoryList: CategoryInfo[] = [
   { slug: "strip-lashes", name: "Strip Lashes", description: "Reusable and everyday strip lashes in natural, volume and dramatic styles.", image: "/images/stock/strip-lashes.webp", order: 1 },
   { slug: "individual-lash-clusters", name: "Individual Lash Clusters", description: "Pre-made clusters for DIY and salon lash extensions in a range of curls and lengths.", image: "/images/stock/clusters.webp", order: 2 },
   { slug: "lash-extension-kits", name: "Lash Extension Kits", description: "Complete kits for beginners, at-home use, salon professionals and lash artist training.", image: "/images/stock/extension-kits.webp", order: 3 },

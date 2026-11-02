@@ -44,7 +44,7 @@ const OrderSchema = new Schema(
     gst: { type: Number, required: true }, // GST component included in total (total / 11)
     note: String,
     payment: {
-      provider: { type: String, default: "demo" },
+      provider: { type: String, default: "test" },
       status: { type: String, enum: PAYMENT_STATUSES, default: "unpaid" },
       method: String,
       paidAt: Date,

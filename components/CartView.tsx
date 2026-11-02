@@ -109,7 +109,7 @@ export function CartView() {
         </dl>
         {offline && <p className="mt-4 text-xs text-muted">Store database not connected. Checkout is unavailable.</p>}
         <Button href="/checkout" className={`mt-6 w-full ${quote && !quote.ok ? "pointer-events-none opacity-50" : ""}`}>Checkout</Button>
-        <p className="mt-3 text-center text-xs text-muted">Demo checkout · no real payment taken</p>
+        <p className="mt-3 text-center text-xs text-muted">Checkout in test mode · no payment taken</p>
       </aside>
     </div>
   );

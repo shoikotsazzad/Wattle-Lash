@@ -8,7 +8,7 @@ import { DECLINE_LAST4 } from "@/data/payment";
 
 const same = (a: string, b: string) => a.length === b.length && timingSafeEqual(Buffer.from(a), Buffer.from(b));
 
-// Demo gateway: no money moves. The browser sends only the method and the card's
+// Test mode: no money moves. The browser sends only the method and the card's
 // last 4 digits (never the full number). A card ending in DECLINE_LAST4 is declined.
 export async function POST(request: Request) {
   if (!dbEnabled()) return noDb();
@@ -32,12 +32,12 @@ export async function POST(request: Request) {
 
   if (method === "card" && last4 === DECLINE_LAST4) {
     order.set("payment.status", "failed");
-    order.timeline.push({ at: new Date(), text: `Card ending ${last4} declined (demo)` });
+    order.timeline.push({ at: new Date(), text: `Card ending ${last4} declined (test)` });
     await order.save();
     return fail("Your card was declined. Try another card.", 402);
   }
 
-  const label = method === "afterpay" ? "Afterpay (demo)" : `${brand} •••• ${last4} (demo)`;
+  const label = method === "afterpay" ? "Afterpay (test)" : `${brand} •••• ${last4} (test)`;
   const paid = await markPaid(String(order._id), label);
   if (!paid) return fail("This order is already paid.", 409);
   return ok({ orderNo });

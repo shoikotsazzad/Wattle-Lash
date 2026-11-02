@@ -17,7 +17,7 @@ export const returnsPolicy: Section[] = [
 ];
 
 export const privacy: Section[] = [
-  { heading: "Information we collect", body: "When you order, create an account, join our mailing list or contact us, we collect your name, email, phone number and delivery address. This is a demo checkout: card details stay in your browser and are never sent to or stored by us." },
+  { heading: "Information we collect", body: "When you order, create an account, join our mailing list or contact us, we collect your name, email, phone number and delivery address. The checkout runs in test mode: card details stay in your browser and are never sent to or stored by us." },
   { heading: "How we use it", body: "To process and deliver orders, provide customer support, and, if you opt in, send our newsletter. We do not sell your information." },
   { heading: "Who we share it with", body: "Only with the services needed to run the store: our database host, image host and delivery partners." },
   { heading: "Cookies", body: "We use a login cookie when you sign in and store your cart in your browser. [PLACEHOLDER: list analytics tools if enabled.]" },
@@ -26,7 +26,7 @@ export const privacy: Section[] = [
 
 export const terms: Section[] = [
   { heading: "About this site", body: "This website is operated by Wattle & Lash (ABN 00 000 000 000). By placing an order you agree to these terms." },
-  { heading: "Prices and payment", body: "All prices are in Australian dollars and include GST. This store is a demo, so no payment is taken at checkout. We may cancel and refund an order if a product is listed with an obvious pricing error or is out of stock." },
+  { heading: "Prices and payment", body: "All prices are in Australian dollars and include GST. The store is in test mode, so no payment is taken at checkout. We may cancel and refund an order if a product is listed with an obvious pricing error or is out of stock." },
   { heading: "Product use", body: "Our products are cosmetic. Read the label and directions before use. Patch test adhesives, lash lift and tint products 24 hours before use, and stop using any product that causes irritation. Professional kits are intended for trained users." },
   { heading: "Shipping and returns", body: "See our Shipping and Returns & Refunds pages." },
   { heading: "Contact", body: "Questions about these terms: hello@wattleandlash.example." },

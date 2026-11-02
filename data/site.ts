@@ -1,5 +1,5 @@
 // Business details used across the whole site (header, footer, contact, SEO, JSON-LD).
-// Portfolio demo: contact details are fictional by design (see notes/client.md).
+// Contact details are placeholders until the real ones are added (see notes/client.md).
 
 export const site = {
   name: "Wattle & Lash",
@@ -32,7 +32,7 @@ export const site = {
   // Hours not supplied. Online store, so none are shown.
   hoursText: "",
 
-  // Handles are fictional. Add a url only once a real account exists.
+  // Handles only for now. Add a url once each account is live.
   socials: [
     { name: "Instagram", handle: "@wattleandlash", url: "" },
     { name: "TikTok", handle: "@wattleandlash", url: "" },
@@ -61,7 +61,7 @@ export const site = {
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
     ],
-    payments: ["Card", "Afterpay", "Demo checkout"],
+    payments: ["Card", "Afterpay", "Test mode"],
   },
 
   schemaType: "OnlineStore",

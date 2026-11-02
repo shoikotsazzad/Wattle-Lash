@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Builds one stand-in photo per seeded product (public/images/products/<sku>.webp) from a pool of
+# Builds one stand-in photo per listed product (public/images/products/<sku>.webp) from a pool of
 # Pexels photos per category, plus the dedicated home-page photos. Each photo gets several crops,
 # so no two products share an identical image. Usage: python3 scripts/product-images.py
 # Needs Pillow. Pexels License, no attribution required. Credits: notes/assets/photo-credits.md

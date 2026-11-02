@@ -1,6 +1,6 @@
 # Stock photo credits
 
-All photos are from Pexels (free under the Pexels License, no attribution required). They are demo stand-ins; replace them with brand photography before a real launch.
+All photos are from Pexels (free under the Pexels License, no attribution required). Replace them with brand photography when available.
 Files: `public/images/stock/<name>.webp` · Source: `https://www.pexels.com/photo/<id>/`
 
 | File | Pexels ID | Used for |

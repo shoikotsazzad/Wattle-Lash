@@ -6,7 +6,7 @@ import { rateLimited } from "@/lib/ratelimit";
 import { getAuthUser } from "@/lib/auth";
 import { newAccessKey, newOrderNo } from "@/lib/orders";
 
-// Creates the order (unpaid). Payment happens next via /api/payments/demo.
+// Creates the order (unpaid). Payment happens next via /api/payments/test.
 export async function POST(request: Request) {
   if (!dbEnabled()) return noDb();
   if (rateLimited(request, "checkout", 15)) return fail("Too many attempts. Please wait a few minutes.", 429);

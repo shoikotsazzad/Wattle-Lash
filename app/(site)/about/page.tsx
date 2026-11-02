@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { pages } from "@/data/pages";
-import { categorySeed } from "@/data/categories";
+import { categoryList } from "@/data/categories";
 import { buildMetadata } from "@/lib/seo";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
@@ -46,7 +46,7 @@ export default function AboutPage() {
           <h2 className="eyebrow text-muted">What we stock</h2>
           <div>
             <ul className="grid gap-x-8 sm:grid-cols-2">
-              {categorySeed.map((c) => (
+              {categoryList.map((c) => (
                 <li key={c.slug} className="border-b border-line">
                   <Link href={`/shop/${c.slug}`} className="flex min-h-11 items-center hover:text-mauve">{c.name}</Link>
                 </li>

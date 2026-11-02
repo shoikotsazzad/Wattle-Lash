@@ -78,7 +78,7 @@ async function ProductContent({ params }: Pick<PageProps<"/product/[slug]">, "pa
 
               <ul className="mt-8 space-y-3 border-t border-line pt-6 text-sm">
                 <li className="flex gap-3"><TruckIcon className="h-5 w-5 shrink-0 text-mauve" />Free standard shipping on orders over {formatAUD(shipping.freeThreshold)}, otherwise {formatAUD(shipping.methods[0].price)} Australia-wide.</li>
-                <li className="flex gap-3"><TagIcon className="h-5 w-5 shrink-0 text-mauve" />Price includes GST. Demo checkout: card or Afterpay, no real payment.</li>
+                <li className="flex gap-3"><TagIcon className="h-5 w-5 shrink-0 text-mauve" />Price includes GST. Checkout is in test mode: card or Afterpay, no payment taken.</li>
               </ul>
 
               {(patchTest || supplement) && (

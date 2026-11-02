@@ -18,7 +18,7 @@ Top: black announcement bar "Free shipping on orders over $100"
 | `/bestsellers` | Grid of products flagged bestseller |
 | `/search?q=` | Results grid |
 | `/about` | Story band · values (only supplied facts) · CTA |
-| `/contact` | Phone, mobile, email, address (fictional), contact form → saved to Mongo |
+| `/contact` | Phone, mobile, email, address (placeholder), contact form → saved to Mongo |
 | `/cart`, `/checkout` | Cart lines, free-shipping progress bar · checkout: email, name, AU address (suburb/state/postcode), phone, shipping method, payment |
 | `/order/[orderNo]` | Confirmation, payment status, items, totals incl. GST |
 | `/track-order` | orderNo + email → status timeline |
@@ -41,12 +41,12 @@ Top: black announcement bar "Free shipping on orders over $100"
 - `data/site.ts`: brand, contact, announcement, nav, footer
 - `data/home.ts`: hero, collections, story, lash styles, routine steps, trust items copy
 - `data/shipping.ts`: rates and free threshold · `data/legal.ts`: policy texts · `data/faq.ts`
-- Catalog in **MongoDB** (admin-managed). `scripts/seed.ts` imports `notes/assets/brand-and-categories.json` + `notes/assets/products.json`.
+- Catalog in **MongoDB** (admin-managed). `scripts/setup-db.mjs` imports `notes/assets/brand-and-categories.json` + `notes/assets/products.json`.
 
 ## Backend (MongoDB): level = orders + admin + customer accounts
-Models: `Category`, `Product` (sku, slug, category, name, description, size, price (cents AUD), stock, bestseller, vegan, images[], active), `Order` (orderNo `WL-YYMMDD-XXXX`, customer, AU address, items snapshot, subtotal, shipping, total, gstIncluded, payment {provider "demo", status, method}, status `new|processing|shipped|delivered|cancelled`, tracking no., timeline), `User` (customer/admin role, bcrypt hash, addresses, wishlist), `Subscriber`, `Lead`.
-API: `/api/products`, `/api/checkout` (server recomputes totals from DB), `/api/payments/demo` (marks paid and decrements stock once), `/api/auth/*`, `/api/account/*`, `/api/track`, `/api/newsletter`, `/api/contact`, `/api/admin/*`.
-Payments: demo gateway (changed 2026-11-01, portfolio project). Card form validated in the browser, only method + last 4 digits sent; card ending 0002 is declined; Afterpay tab approves instantly. No Stripe.
+Models: `Category`, `Product` (sku, slug, category, name, description, size, price (cents AUD), stock, bestseller, vegan, images[], active), `Order` (orderNo `WL-YYMMDD-XXXX`, customer, AU address, items snapshot, subtotal, shipping, total, gstIncluded, payment {provider "test", status, method}, status `new|processing|shipped|delivered|cancelled`, tracking no., timeline), `User` (customer/admin role, bcrypt hash, addresses, wishlist), `Subscriber`, `Lead`.
+API: `/api/products`, `/api/checkout` (server recomputes totals from DB), `/api/payments/test` (marks paid and decrements stock once), `/api/auth/*`, `/api/account/*`, `/api/track`, `/api/newsletter`, `/api/contact`, `/api/admin/*`.
+Payments: test-mode gateway (changed 2026-11-01). Card form validated in the browser, only method + last 4 digits sent; card ending 0002 is declined; Afterpay tab approves instantly. No Stripe.
 
 ## Admin portal `/admin` (noindex, role-checked in proxy.ts + every handler)
 - Dashboard: today/7-day revenue, order count, low-stock list, recent orders

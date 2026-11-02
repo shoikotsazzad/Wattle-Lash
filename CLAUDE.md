@@ -11,14 +11,14 @@ sme-core and sme-ecommerce assume Bangladesh. For this project use instead:
 - Currency AUD (`$`, `en-AU` formatting), prices **include GST**. Show "incl. GST" at checkout and on invoices.
 - Address: street, suburb, state (NSW, VIC, QLD, WA, SA, TAS, ACT, NT), 4-digit postcode. Phone: Australian format (`04xx xxx xxx` mobile, `0x xxxx xxxx` landline).
 - Shipping: free standard shipping over $100 AUD (from brand data); other rates to be decided in the plan.
-- Payments: **demo gateway only** (portfolio project, decided 2026-11-01). Card form + Afterpay tab, no real charge, no gateway keys. Test card 4242…, a card ending 0002 is declined. No COD, bKash, Nagad or SSLCommerz.
+- Payments: **test-mode gateway only** (decided 2026-11-01). Card form + Afterpay tab, no real charge, no gateway keys. Test card 4242…, a card ending 0002 is declined. No COD, bKash, Nagad or SSLCommerz.
 - No WhatsApp buttons unless the developer asks; contact = phone, email, form, Instagram.
 - Cosmetic copy only: no therapeutic or medical claims (e.g. "grows lashes", "treats") — Australian rules (TGA/ACCC). Keep the supplied wording ("helps lashes look fuller").
 
 ## Client
-- Name: Wattle & Lash (portfolio demo — fictional brand)
+- Name: Wattle & Lash
 - Industry: ecommerce (lash, brow and eye beauty)
-- Phone: (03) 7010 4321 · Mobile: 0491 570 156 · Email: hello@wattleandlash.example (all fictional, see notes/client.md)
+- Phone: (03) 7010 4321 · Mobile: 0491 570 156 · Email: hello@wattleandlash.example (placeholders, not working contact details, see notes/client.md)
 - Address: Shop 1, 00 Example Lane, Fitzroy VIC 3065, Australia (placeholder)
 - Language: English (Australian spelling)
 - Full details: `notes/client.md` · Missing items: `notes/missing.md`
@@ -48,11 +48,11 @@ Reference: "Velora Beauty" home page (sent in chat 2026-10-30; save as `notes/de
 ## Status
 - Stage: new
 - Stage: built (2026-10-30). Plan approved: `notes/plan.md`
-- Done: all public pages (home with 6 reference sections plus 3 new ones), shop/category/product/search, cart, checkout with demo payment (card + Afterpay, `/api/payments/demo`, Stripe removed), order confirmation, track order, customer accounts, policy pages and FAQ, SEO (sitemap, JSON-LD). Backend: MongoDB with Next route handlers. Admin portal `/admin`: dashboard, orders with CSV, products with Cloudinary photos, categories, discount codes, customers, messages, subscribers, admin users. `npm run seed` imports 15 categories and 225 products plus the first admin.
-- Tested: build and lint clean; full API flow against a local MongoDB (pricing, coupons, mark paid with stock deducted once, tracking, CSV). Demo payment tested 2026-11-01 against a local MongoDB: decline, retry, double pay blocked, stock deducted once; browser flow checkout → paid confirmation.
-- Pending: `.env.local` filled (Atlas db `wattle_and_lash`, Cloudinary); developer to run `npm run seed`. Old Stripe lines in `.env.local` are unused and can be deleted. Next.js 16.4.0 has a critical advisory, upgrade to 16.4.3 awaiting approval.
-- Placeholders open (3): dispatch times (shipping page), returns policy body, analytics line (privacy). Contact/ABN/socials fictional by design. Stock photos are Pexels stand-ins (`notes/assets/photo-credits.md`).
-- Redesign 2026-11-02: compact footer (centred below lg), bottom bar below lg with no top menu button (About and Contact are in the footer), shop left sidebar (filter sheet below lg), minimal About and Contact, narrow container on cart/checkout/account/order, one stand-in photo per product (`scripts/product-images.py`, no re-seed needed), no photo repeated on home.
+- Done: all public pages (home with 6 reference sections plus 3 new ones), shop/category/product/search, cart, checkout with test payment (card + Afterpay, `/api/payments/test`, Stripe removed), order confirmation, track order, customer accounts, policy pages and FAQ, SEO (sitemap, JSON-LD). Backend: MongoDB with Next route handlers. Admin portal `/admin`: dashboard, orders with CSV, products with Cloudinary photos, categories, discount codes, customers, messages, subscribers, admin users. `npm run db:setup` imports 15 categories and 225 products plus the first admin.
+- Tested: build and lint clean; full API flow against a local MongoDB (pricing, coupons, mark paid with stock deducted once, tracking, CSV). Test payment tested 2026-11-01 against a local MongoDB: decline, retry, double pay blocked, stock deducted once; browser flow checkout → paid confirmation.
+- Pending: `.env.local` filled (Atlas db `wattle_and_lash`, Cloudinary); developer to run `npm run db:setup`. Old Stripe lines in `.env.local` are unused and can be deleted. Next.js 16.4.0 has a critical advisory, upgrade to 16.4.3 awaiting approval.
+- Placeholders open (3): dispatch times (shipping page), returns policy body, analytics line (privacy). Contact/ABN/socials are placeholders, not working details. Stock photos are Pexels stand-ins (`notes/assets/photo-credits.md`).
+- Redesign 2026-11-02: compact footer (centred below lg), bottom bar below lg with no top menu button (About and Contact are in the footer), shop left sidebar (filter sheet below lg), minimal About and Contact, narrow container on cart/checkout/account/order, one stand-in photo per product (`scripts/product-images.py`, no database update needed), no photo repeated on home.
 - Dev note: `next dev` dropped hand-written classes added to `app/globals.css` later on, while `next build` kept them. Use Tailwind utilities for new styles.
 - Design note: muted text is `#6F5A5C` (darker than `#7A6466`) for 4.5:1 contrast on blush.
 

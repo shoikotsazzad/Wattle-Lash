@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { formatAUD } from "@/lib/money";
 import { AU_STATES } from "@/data/shipping";
-import { demoPayment } from "@/data/payment";
+import { testPayment } from "@/data/payment";
 import type { FieldErrors } from "@/lib/validate";
 import { useCart } from "./StoreProvider";
 import { readCoupon, useQuote } from "./useQuote";
@@ -117,7 +117,7 @@ export function CheckoutView() {
           <p className="eyebrow text-muted">Step 2 of 2</p>
           <h2 className="mt-2 font-serif text-3xl">Payment</h2>
           <p className="mt-2 text-sm text-muted">Order {pay.orderNo} · {formatAUD(pay.total)} incl. GST</p>
-          <DemoPayForm pay={pay} onPaid={() => cart.clear()} />
+          <TestPayForm pay={pay} onPaid={() => cart.clear()} />
         </div>
         {summary}
       </div>
@@ -216,7 +216,7 @@ export function CheckoutView() {
   );
 }
 
-// Card helpers for the demo form. Checked in the browser only; the full number is never sent.
+// Card helpers for the payment form. Checked in the browser only; the full number is never sent.
 const digits = (v: string) => v.replace(/\D/g, "");
 const groupCard = (v: string) => digits(v).slice(0, 19).replace(/(\d{4})(?=\d)/g, "$1 ");
 
@@ -247,14 +247,14 @@ function expiryOk(v: string) {
   return end > now;
 }
 
-function DemoPayForm({ pay, onPaid }: { pay: Pay; onPaid: () => void }) {
+function TestPayForm({ pay, onPaid }: { pay: Pay; onPaid: () => void }) {
   const router = useRouter();
   const [method, setMethod] = useState<"card" | "afterpay">("card");
   const [card, setCard] = useState({ name: "", number: "", expiry: "", cvc: "" });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const instalment = Math.ceil(pay.total / demoPayment.afterpayInstalments);
+  const instalment = Math.ceil(pay.total / testPayment.afterpayInstalments);
 
   const setField = (k: keyof typeof card) => (e: React.ChangeEvent<HTMLInputElement>) => {
     let v = e.target.value;
@@ -280,7 +280,7 @@ function DemoPayForm({ pay, onPaid }: { pay: Pay; onPaid: () => void }) {
     setBusy(true);
     try {
       await new Promise((r) => setTimeout(r, 1200)); // feel of a real gateway
-      const res = await fetch("/api/payments/demo", {
+      const res = await fetch("/api/payments/test", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ orderNo: pay.orderNo, accessKey: pay.accessKey, method, last4: method === "card" ? num.slice(-4) : undefined, brand: cardBrand(num) }),
@@ -315,9 +315,9 @@ function DemoPayForm({ pay, onPaid }: { pay: Pay; onPaid: () => void }) {
   return (
     <form onSubmit={onPay} noValidate className="mt-6">
       <div className="border border-pink bg-pink/25 p-4 text-sm">
-        <p className="font-medium">{demoPayment.banner}</p>
+        <p className="font-medium">{testPayment.banner}</p>
         <p className="mt-1 text-muted">
-          Use test card <span className="whitespace-nowrap font-medium text-ink">{demoPayment.testCard}</span>, any future expiry and any CVC.
+          Use test card <span className="whitespace-nowrap font-medium text-ink">{testPayment.testCard}</span>, any future expiry and any CVC.
           A card ending in 0002 is declined.
         </p>
       </div>
@@ -352,15 +352,15 @@ function DemoPayForm({ pay, onPaid }: { pay: Pay; onPaid: () => void }) {
         </div>
       ) : (
         <div className="mt-5 border border-line p-5 text-sm">
-          <p className="font-serif text-2xl">{demoPayment.afterpayInstalments} payments of {formatAUD(instalment)}</p>
-          <p className="mt-2 text-muted">Pay fortnightly, interest-free. In this demo the plan is approved straight away.</p>
+          <p className="font-serif text-2xl">{testPayment.afterpayInstalments} payments of {formatAUD(instalment)}</p>
+          <p className="mt-2 text-muted">Pay fortnightly, interest-free. In test mode the plan is approved straight away.</p>
         </div>
       )}
 
       {error && <p role="alert" className="mt-4 text-danger">{error}</p>}
       <button type="submit" disabled={busy} className="btn btn-pink mt-6 w-full">
         <LockIcon className="h-4 w-4" />{" "}
-        {busy ? "Processing…" : method === "afterpay" ? "Approve with Afterpay (demo)" : `Pay ${formatAUD(pay.total)}`}
+        {busy ? "Processing…" : method === "afterpay" ? "Approve with Afterpay (test)" : `Pay ${formatAUD(pay.total)}`}
       </button>
       <p className="mt-3 text-center text-xs text-muted">Nothing is charged. Card details stay in your browser and are not stored.</p>
     </form>
