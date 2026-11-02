@@ -63,21 +63,42 @@ await db.collection("products").createIndex({ slug: 1 }, { unique: true });
 console.log(`Categories: ${catRes.upsertedCount} added, ${catRes.modifiedCount} updated`);
 console.log(`Products:   ${prodRes.upsertedCount} added, ${prodRes.modifiedCount} updated (${products.length} in file)`);
 
+// The admin in .env.local is the source of truth: changing it and re-running the seed updates
+// the existing admin instead of leaving the old login active next to a new one.
 const email = process.env.ADMIN_EMAIL?.toLowerCase().trim();
 const password = process.env.ADMIN_PASSWORD;
+const name = process.env.ADMIN_NAME?.trim();
 if (email && password) {
   const users = db.collection("users");
-  const existing = await users.findOne({ email });
-  if (existing) {
-    if (existing.role !== "admin") await users.updateOne({ email }, { $set: { role: "admin" }, $inc: { sessionVersion: 1 } });
-    console.log(`Admin:      ${email} (already existed, role admin)`);
-  } else {
+  const hashPassword = async () => {
     const salt = randomBytes(16).toString("hex");
     const hash = await promisify(scrypt)(password, salt, 64);
+    return `scrypt$${salt}$${hash.toString("hex")}`;
+  };
+  const passwordMatches = async (stored) => {
+    const [, salt, hash] = String(stored).split("$");
+    if (!salt || !hash) return false;
+    return (await promisify(scrypt)(password, salt, 64)).toString("hex") === hash;
+  };
+
+  const admins = await users.find({ role: "admin" }).toArray();
+  const byEmail = await users.findOne({ email });
+  // Same email, or the store's only admin moving to a new email.
+  const target = byEmail ?? (admins.length === 1 ? admins[0] : null);
+
+  if (target) {
+    const samePassword = await passwordMatches(target.passwordHash);
+    const set = { role: "admin", email, updatedAt: now };
+    if (name) set.name = name;
+    if (!samePassword) set.passwordHash = await hashPassword();
+    const loginChanged = target.email !== email || !samePassword || target.role !== "admin";
+    await users.updateOne({ _id: target._id }, loginChanged ? { $set: set, $inc: { sessionVersion: 1 } } : { $set: set });
+    console.log(`Admin:      ${email} ${loginChanged ? "updated, please log in again" : "up to date"}`);
+  } else {
     await users.insertOne({
       email,
-      name: "Store admin",
-      passwordHash: `scrypt$${salt}$${hash.toString("hex")}`,
+      name: name || "Store admin",
+      passwordHash: await hashPassword(),
       role: "admin",
       addresses: [],
       sessionVersion: 0,
@@ -85,6 +106,7 @@ if (email && password) {
       updatedAt: now,
     });
     console.log(`Admin:      ${email} created`);
+    if (admins.length) console.log(`            ${admins.length} other admin account(s) still exist. Remove any you don't need in Admin users.`);
   }
 } else {
   console.log("Admin:      skipped (set ADMIN_EMAIL and ADMIN_PASSWORD in .env.local)");
