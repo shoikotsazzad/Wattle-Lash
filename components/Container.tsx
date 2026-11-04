@@ -1,5 +1,5 @@
 export function Container({ children, className = "", narrow = false }: { children: React.ReactNode; className?: string; narrow?: boolean }) {
-  const width = className.includes("max-w-") ? "" : narrow ? "max-w-5xl" : "max-w-6xl";
+  const width = className.includes("max-w-") ? "" : narrow ? "max-w-5xl" : "max-w-[1760px]";
   return <div className={`px-5 md:px-10 lg:px-12 mx-auto w-full ${width} ${className}`}>{children}</div>;
 }
 

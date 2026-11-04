@@ -138,7 +138,7 @@ export function ShopBrowser({ products, categories, activeCategory, initialQuery
 
   return (
     <div className="lg:grid lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-12">
-      <aside className="hidden lg:sticky lg:top-28 lg:block lg:max-h-[calc(100vh-8rem)] lg:self-start lg:overflow-y-auto lg:pr-2">
+      <aside className="hidden lg:sticky lg:top-28 lg:block lg:max-h-[calc(100vh/var(--z,1)-8rem)] lg:self-start lg:overflow-y-auto lg:pr-2">
         {search("shop-search")}
         <div className={categories ? "mt-6" : ""}>{panel("side")}</div>
       </aside>
@@ -157,7 +157,7 @@ export function ShopBrowser({ products, categories, activeCategory, initialQuery
         {list.length ? (
           <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:gap-x-5 md:gap-y-10">
             {list.slice(0, shown).map((p, i) => (
-              <li key={p.sku}><ProductCard p={p} priority={i < 3} sizes="(min-width: 1024px) 24vw, (min-width: 768px) 30vw, 50vw" /></li>
+              <li key={p.sku}><ProductCard p={p} priority={i < 3} sizes="(min-width: 1280px) 20vw, (min-width: 768px) 30vw, 50vw" /></li>
             ))}
           </ul>
         ) : (

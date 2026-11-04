@@ -42,21 +42,21 @@ export function Header({ categories }: { categories: Cat[] }) {
 
   return (
     <header className={`${overHero ? "absolute inset-x-0 top-9" : "sticky top-0"} z-40 text-cream ${solid ? "bg-espresso" : "bg-transparent"} transition-colors`}>
-      <nav aria-label="Main" className="px-5 md:px-10 lg:px-12 mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto_1fr] items-center lg:h-24">
+      <nav aria-label="Main" className="px-5 md:px-10 lg:px-12 mx-auto grid h-16 max-w-[1760px] grid-cols-[1fr_auto_1fr] items-center lg:h-24">
         {/* Left: nav (desktop only; phones and tablets use the bottom bar) */}
         <div className="flex items-center">
-          <ul className="hidden items-center gap-4 lg:flex xl:gap-6">
+          <ul className="hidden items-center gap-4 lg:flex">
             {site.nav.map((item) =>
               item.mega ? (
                 <li key="mega">
-                  <button type="button" className="eyebrow flex min-h-11 items-center gap-1 text-[11px] hover:text-pink xl:text-xs" aria-expanded={open("mega")} aria-controls="mega-menu" onClick={() => toggle("mega")}>
+                  <button type="button" className="eyebrow flex min-h-11 items-center gap-1 text-[11px] hover:text-pink" aria-expanded={open("mega")} aria-controls="mega-menu" onClick={() => toggle("mega")}>
                     {item.label}
                     <ChevronIcon className={`h-3.5 w-3.5 transition ${open("mega") ? "rotate-180" : ""}`} />
                   </button>
                 </li>
               ) : (
                 <li key={item.label}>
-                  <Link href={item.href} className="eyebrow flex min-h-11 items-center text-[11px] hover:text-pink xl:text-xs" aria-current={pathname === item.href ? "page" : undefined}>
+                  <Link href={item.href} className="eyebrow flex min-h-11 items-center text-[11px] hover:text-pink" aria-current={pathname === item.href ? "page" : undefined}>
                     {item.label}
                   </Link>
                 </li>
@@ -67,7 +67,7 @@ export function Header({ categories }: { categories: Cat[] }) {
 
         {/* Centre: wordmark */}
         <Link href="/" className="flex flex-col items-center text-center leading-none" aria-label={`${site.name} home`}>
-          <span className="display text-[22px] tracking-[0.06em] sm:text-[26px] lg:text-[28px] xl:text-[32px]">Wattle &amp; Lash</span>
+          <span className="display text-[22px] tracking-[0.06em] sm:text-[26px] lg:text-[28px]">Wattle &amp; Lash</span>
           <span className="mt-1 text-[8px] tracking-[0.42em] uppercase lg:mt-1.5 lg:text-[10px]">{site.wordmarkSub}</span>
         </Link>
 
@@ -103,7 +103,7 @@ export function Header({ categories }: { categories: Cat[] }) {
       {/* Collections mega menu (desktop) */}
       {open("mega") && (
         <div id="mega-menu" className="hidden border-t border-cream/15 bg-espresso lg:block">
-          <div className="mx-auto grid max-w-6xl grid-cols-4 gap-8 px-6 py-10">
+          <div className="px-5 md:px-10 lg:px-12 mx-auto grid max-w-[1760px] grid-cols-4 gap-8 py-10">
             <div>
               <p className="eyebrow text-pink">Shop</p>
               <ul className="mt-4 space-y-3 font-serif text-xl">

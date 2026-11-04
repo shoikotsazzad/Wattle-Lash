@@ -16,7 +16,7 @@ export function Footer() {
             <p className="mt-1 text-xs text-cream/60">{site.tagline}</p>
           </div>
           <nav aria-label="Footer">
-            <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm lg:gap-x-3.5 lg:text-[13px] xl:gap-x-4">
+            <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm lg:gap-x-3.5 lg:text-[13px]">
               {site.footer.links.map((l) => (
                 <li key={l.href}><Link href={l.href} className="whitespace-nowrap text-cream/80 hover:text-pink">{l.label}</Link></li>
               ))}
